@@ -5,16 +5,16 @@
 
 class Graph {
 private:
-    int V; // ¶¥µãÊı
-    vector<int>* adj; // ÁÚ½Ó±í
+    int V; // é¡¶ç‚¹æ•°
+    vector<int>* adj; // é‚»æ¥è¡¨
 
 public:
-    Graph(int V); // ¹¹Ôìº¯Êı
-    void addEdge(int v, int w); // Ìí¼Ó±ß
-    void BFS(int s); // ¹ã¶ÈÓÅÏÈËÑË÷
-    void DFS(int s); // Éî¶ÈÓÅÏÈËÑË÷
-    void dijkstra(int s); // ×î¶ÌÂ·¾¶Ëã·¨
-    void prim(); // ×îĞ¡Ö§³ÅÊ÷Ëã·¨
+    Graph(int V); // æ„é€ å‡½æ•°
+    void addEdge(int v, int w); // æ·»åŠ è¾¹
+    void BFS(int s); // å¹¿åº¦ä¼˜å…ˆæœç´¢
+    void DFS(int s); // æ·±åº¦ä¼˜å…ˆæœç´¢
+    void dijkstra(int s); // æœ€çŸ­è·¯å¾„ç®—æ³•
+    void prim(); // æœ€å°æ”¯æ’‘æ ‘ç®—æ³•
 };
 
 Graph::Graph(int V) {
@@ -28,7 +28,7 @@ void Graph::addEdge(int v, int w) {
 }
 
 void Graph::BFS(int s) {//BFS
-    vector<bool> visited(V, false); // ¼ÇÂ¼ÊÇ·ñ·ÃÎÊ¹ı
+    vector<bool> visited(V, false); 
     queue<int> q;
 
     visited[s] = true;
@@ -49,7 +49,7 @@ void Graph::BFS(int s) {//BFS
 }
 
 void Graph::DFS(int s) {//DFS
-    vector<bool> visited(V, false); // ¼ÇÂ¼ÊÇ·ñ·ÃÎÊ¹ı
+    vector<bool> visited(V, false); 
     stack<int> st;
 
     visited[s] = true;
@@ -70,8 +70,8 @@ void Graph::DFS(int s) {//DFS
 }
 
 void Graph::dijkstra(int s) {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // Ğ¡¶¥¶Ñ
-    vector<int> dist(V, INT_MAX); // ¼ÇÂ¼µ½ÆğµãµÄ¾àÀë
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; 
+    vector<int> dist(V, INT_MAX); 
 
     pq.push(make_pair(0, s));
     dist[s] = 0;
@@ -82,7 +82,7 @@ void Graph::dijkstra(int s) {
 
         for (auto i = adj[u].begin(); i != adj[u].end(); i++) {
             int v = *i;
-            int weight = 1; // ±ßÈ¨ÖØÎª1
+            int weight = 1; 
 
             if (dist[v] > dist[u] + weight) {
                 dist[v] = dist[u] + weight;
@@ -91,20 +91,20 @@ void Graph::dijkstra(int s) {
         }
     }
 
-    cout << "×î¶ÌÂ·¾¶£º\n";
+    cout << "æœ€çŸ­è·¯å¾„ï¼š\n";
     for (int i = 0; i < V; i++) {
-        cout << s << " µ½ " << i << " µÄ¾àÀëÎª " << dist[i] << endl;
+        cout << s << " åˆ° " << i << " çš„è·ç¦»ä¸º " << dist[i] << endl;
     }
     cout << endl;
 }
 
 void Graph::prim() {
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // Ğ¡¶¥¶Ñ
-    vector<int> key(V, INT_MAX); // ¼ÇÂ¼µ½MSTµÄ×îĞ¡È¨ÖØ
-    vector<int> parent(V, -1); // ¼ÇÂ¼MSTÖĞÃ¿¸ö½ÚµãµÄ¸¸½Úµã
-    vector<bool> inMST(V, false); // ¼ÇÂ¼ÊÇ·ñÔÚMSTÖĞ
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; 
+    vector<int> key(V, INT_MAX); 
+    vector<int> parent(V, -1); 
+    vector<bool> inMST(V, false); 
 
-    pq.push(make_pair(0, 0)); // µÚÒ»¸ö½ÚµãÈë¶Ó
+    pq.push(make_pair(0, 0)); 
     key[0] = 0;
 
     while (!pq.empty()) {
@@ -115,7 +115,7 @@ void Graph::prim() {
 
         for (auto i = adj[u].begin(); i != adj[u].end(); i++) {
             int v = *i;
-            int weight = 1; // ±ßÈ¨ÖØÎª1
+            int weight = 1; 
 
             if (inMST[v] == false && key[v] > weight) {
                 key[v] = weight;
@@ -125,7 +125,7 @@ void Graph::prim() {
         }
     }
 
-    cout << "×îĞ¡Ö§³ÅÊ÷£º\n";
+    cout << "æœ€å°æ”¯æ’‘æ ‘ï¼š\n";
     for (int i = 1; i < V; i++) {
         cout << parent[i] << " - " << i << endl;
     }
